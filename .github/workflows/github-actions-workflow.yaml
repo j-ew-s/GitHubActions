@@ -8,7 +8,7 @@ jobs:
     - run: echo "This Jog was triggered by a ${{github.event_name}} event"
 
     - name: Check Out Repository Code to Git Hub Runner
-      uses: actions/checkout
+      uses: actions/checkout@v3
 
     - run: echo "The ${{github.repository}} repository has been cloned to the runner"
 
@@ -19,9 +19,9 @@ jobs:
         ls ${{ github.workspace }}
 
     - name: Setup dotnet on runner
-      uses: actions/setup-dotnet
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0'
+        dotnet-version: '8.0.x'
 
     - name: Display dotnet version
       run: dotnet --version
