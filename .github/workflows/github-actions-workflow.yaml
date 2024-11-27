@@ -1,14 +1,14 @@
 name: GitHub Actions Demo
-on: [push, pull_request]
+on: push
 jobs: 
   Example-Action-Job: 
     name: Exploring GHA
-    runs-on: unbuntu-latests
+    runs-on: ubuntu-latest
     steps:
     - run: echo "This Jog was triggered by a ${{github.event_name}} event"
 
-    - name: Check Out Reporitory Code to Git Hub Runner
-      uses: actions/checkout@latest
+    - name: Check Out Repository Code to Git Hub Runner
+      uses: actions/checkout
 
     - run: echo "The ${{github.repository}} repository has been cloned to the runner"
 
