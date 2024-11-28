@@ -13,7 +13,7 @@ jobs:
 
     env:
       AZURE_WEBAPP_PATH : .
-      AZURE_WEBAPP_NAME : githubactions-test
+      AZURE_WEBAPP_NAME : 'githubactions-test'
       AZURE_WEBAPP_FULL_PATH: ./GithubActions.MVC
 
     steps:
@@ -37,6 +37,7 @@ jobs:
       uses: Azure/webapps-deploy@v2
       with: 
         app-name: ${{env.AZURE_WEBAPP_NAME}}
+        slot-name: 'Production'
         publish-profile: ${{secrets.AZURE_DEPLOYMENT_PROFILE}}
         package: '${{env.AZURE_WEBAPP_FULL_PATH}}'
 
