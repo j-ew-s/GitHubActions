@@ -1,4 +1,4 @@
-name: .NET Build
+name: Publish To Azure
 
 on:
   push:
@@ -10,6 +10,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    env:
+      AZURE_WEBAPP_PATH : .
+      AZURE_WEBAPP_NAME : githubactions-test
+      AZURE_WEBAPP_FULL_PATH: ./mcv
 
     steps:
     - uses: actions/checkout@v4
@@ -24,6 +29,15 @@ jobs:
     
     - name: Build
       run: dotnet build --no-restore
+
+    - name: Publish
+      run: dotnet publish -c Release '${{env.AZURE_WEBAPP_FULL_PATH}}'
+
+    - name: Deploy
+      uses: Azure/webapps-deploy@v2
+      with: 
+        app-name: ${{env.AZURE_WEBAPP_NAME}}
+        publish-profile: ${{secrets.AZURE_DEPLOYMENT_PROFILE}}
+        package: '${{env.AZURE_WEBAPP_FULL_PATH}}'
+
     
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
