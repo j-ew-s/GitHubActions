@@ -30,15 +30,5 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-    - name: Publish
-      run: dotnet publish -c Release '${{env.AZURE_WEBAPP_FULL_PATH}}'
-
-    - name: Deploy
-      uses: Azure/webapps-deploy@v2
-      with: 
-        app-name: ${{env.AZURE_WEBAPP_NAME}}
-        slot-name: 'Production'
-        publish-profile: ${{secrets.AZURE_DEPLOYMENT_PROFILE}}
-        package: '${{env.AZURE_WEBAPP_FULL_PATH}}'
 
     
